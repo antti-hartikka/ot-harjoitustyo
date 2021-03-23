@@ -1,5 +1,15 @@
-# Ohjelmistotekniikka-harjoitustyö
+# Prima vista trainer
+_Ohjelmistotekniikka-harjoitustyö_
 
-Tämä _repo_ tulee olemaan __upeinta__ mitä käpistelijöiden osasto on koskaan tullut näkemään.
+---
 
-* _Toisaalta_, sehän nähdään __loppupalautuksessa__
+Sovellus tulee olemaan työkalu soittotaidon kehittämiseen. Musiikkitermi _prima vista_ tarkoittaa soittamista ensi näkemältä.
+Käyttäjälle generoidaan soitettavaa ja nuotit ruudulle saatuaan käyttäjä soittaa annetun "kappaleen" ja sovellus antaa palautetta.
+
+## Dokumentaatio
+
+---
+
+[Vaativuusmäärittely](https://github.com/antti-hartikka/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+
+[Tuntikirjanpito](https://github.com/antti-hartikka/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
