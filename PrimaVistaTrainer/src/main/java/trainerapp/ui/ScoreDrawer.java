@@ -1,6 +1,7 @@
 package trainerapp.ui;
 
 import javafx.scene.canvas.GraphicsContext;
+import trainerapp.domain.Note;
 import trainerapp.domain.Score;
 
 import java.util.Arrays;
@@ -28,22 +29,34 @@ public class ScoreDrawer {
     private Score score;
     private GraphicsContext gc;
     private int x;
-    private int y;
+    private final int y;
+    Note first;
+    private final int space = 75;
+    private final int noteStart = 100;
 
     public ScoreDrawer(Score score, GraphicsContext gc, int x, int y) {
         this.score = score;
+        int[] notes = score.getNotes();
+        first = new Note(notes[0], 4, noteStart, getY(notes[0]));
+        Note previousNote = first;
+        for (int i = 1; i < notes.length; i++) {
+            previousNote.setNext(new Note(notes[i], 4, previousNote.getX() + space, getY(notes[i])));
+            Note newNote = previousNote.next();
+            newNote.setPrevious(previousNote);
+            previousNote = previousNote.next();
+        }
+
         this.gc = gc;
         this.x = x;
         this.y = y;
     }
 
-    public void draw(){
+    public void draww(){
         String a = staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff;
         String s = gStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+"\n"+
-                fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;
+                   fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;
         gc.fillText(s, x, y);
         x += 100;
-        y -= 10;
 
         int[] raw = score.getNotes();
         System.out.println(Arrays.toString(raw));
@@ -60,9 +73,32 @@ public class ScoreDrawer {
                 if (note == 40 || note == 60 || note == 81) {
                     gc.fillText(leger, x, noteY);
                 }
-                x += 50;
+                x += 75;
             }
+            gc.fillText(barLine + "\n" + barLine, x, y);
+            x += 75;
         }
+    }
+
+    public void draw() {
+        String a = staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff;
+        String s = gStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+"\n"+
+                fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;
+        gc.fillText(s, x, y);
+        x += 100;
+
+        Note note = first;
+        int count = 0;
+
+        while(note != null) {
+            int val = note.getVal();
+            if (val == 40 || val == 60 || val == 81) {
+                gc.fillText(leger, note.getX(), note.getY());
+            }
+            gc.fillText(note.toString(), note.getX(), note.getY());
+            note = note.next();
+        }
+
     }
 
     private int getY(int note) {
@@ -72,7 +108,7 @@ public class ScoreDrawer {
         int c3Deg = score.getDegrees(60);
         int octChange = oct - 6;
         int degChange = deg - c3Deg;
-        return y - ((octChange * 70) + (degChange * 10));
+        return y - ((octChange * 70) + (degChange * 10)) - 10 + 300;
     }
 
 }

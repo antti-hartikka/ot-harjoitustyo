@@ -15,21 +15,39 @@ public class Score {
     private boolean[] isNormalized;
     private boolean[] isSharp;
     private int[] degrees;
+    private boolean[] flats = new boolean[7];
+    private boolean[] sharps = new boolean[7];
 
+    private Note[] noteObjects;
+
+    // sets scale to C major
     public Score() {
         scale = new int[]{0,2,4,5,7,9,11};
         degrees = new int[]{0,0,1,1,2,3,3,4,4,5,5,6};
     }
 
-    public void generate(int length) {
+    public Score(int[] scale, int[] degrees) {
+        this.scale = scale;
+        this.degrees = degrees;
+    }
+
+    public void setFlats(boolean[] flats) {
+        this.flats = flats;
+    }
+
+    public void setSharps(boolean[] sharps) {
+        this.sharps = sharps;
+    }
+
+    public void generate(int noteCount) {
         Random r = new Random();
-        notes = new int[length];
+        notes = new int[noteCount];
         int octave;
         while(notes[0] < noteBoundLow || notes[0] > noteBoundHigh) {
             octave = ((noteBoundLow / 12) + r.nextInt((noteBoundHigh - noteBoundLow) / 12)) * 12;
             notes[0] = octave + scale[0];
         }
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < noteCount; i++) {
             while (notes[i] < noteBoundLow || notes[i] > noteBoundHigh) {
                 float a = r.nextFloat();
                 int prevNote = notes[i - 1] % 12;
