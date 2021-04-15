@@ -1,7 +1,5 @@
 package trainerapp.domain;
 
-import trainerapp.ui.Note;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -17,8 +15,6 @@ public class Score {
     private int[] degrees;
     private boolean[] flats = new boolean[7];
     private boolean[] sharps = new boolean[7];
-
-    private Note[] noteObjects;
 
     // sets scale to C major
     public Score() {

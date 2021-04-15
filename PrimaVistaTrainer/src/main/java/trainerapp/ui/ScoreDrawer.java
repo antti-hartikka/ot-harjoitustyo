@@ -30,8 +30,16 @@ public class ScoreDrawer {
     Note first;
     private final int space = 75;
     private final int noteStart = 100;
+    private final int setX;
 
-    public ScoreDrawer(Score score, GraphicsContext gc, int x, int y) {
+    public ScoreDrawer(GraphicsContext gc, int x, int y) {
+        this.gc = gc;
+        this.x = x;
+        this.y = y;
+        this.setX = x;
+    }
+
+    public void setScore(Score score) {
         this.score = score;
         int[] notes = score.getNotes();
         first = new Note(notes[0], 4, noteStart, getY(notes[0]));
@@ -42,10 +50,7 @@ public class ScoreDrawer {
             newNote.setPrevious(previousNote);
             previousNote = previousNote.next();
         }
-
-        this.gc = gc;
-        this.x = x;
-        this.y = y;
+        this.x = setX;
     }
 
     public void draw() {
@@ -60,13 +65,21 @@ public class ScoreDrawer {
 
         while(note != null) {
             int val = note.getVal();
-            if (val == 40 || val == 60 || val == 81) {
-                gc.fillText(leger, note.getX(), note.getY());
-            }
+            drawLeger(note);
             gc.fillText(note.toString(), note.getX(), note.getY());
             note = note.next();
         }
+    }
 
+    private void drawLeger(Note note) {
+        int val = note.getVal();
+        if (val == 40 || val == 60 || val == 81) {
+            gc.fillText(leger, note.getX(), note.getY());
+        } else if (val == 38) {
+            gc.fillText(leger, note.getX(), note.getY() - 10);
+        } else if (val == 83) {
+            gc.fillText(leger, note.getX(), note.getY() + 10);
+        }
     }
 
     private int getY(int note) {
@@ -76,7 +89,7 @@ public class ScoreDrawer {
         int c3Deg = score.getDegrees(60);
         int octChange = oct - 6;
         int degChange = deg - c3Deg;
-        return y - ((octChange * 70) + (degChange * 10)) - 10 + 300;
+        return y - ((octChange * 70) + (degChange * 10)) - 10;
     }
 
 }
