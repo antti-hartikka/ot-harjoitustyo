@@ -1,4 +1,4 @@
-package trainerapp.domain;
+package trainerapp.ui;
 
 public class Note {
 
@@ -20,14 +20,14 @@ public class Note {
     private final String leger = "\uE022";
     private final String barLine = "\uE030";
 
-    public Note (int midiValue, int length, int x, int y) {
+    public Note(int midiValue, int length, int x, int y) {
         this.midiValue = midiValue;
         this.length = length;
         this.x = x;
         this.y = y;
     }
 
-    public Note (Note previous) {
+    public Note(Note previous) {
         this.previous = previous;
     }
 
