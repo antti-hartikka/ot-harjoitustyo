@@ -22,8 +22,8 @@ public class DBSessionDao implements SessionDao {
                             "FOREIGN KEY (user_id) REFERENCES Users(id)" +
                             ")"
             );
-        } catch (SQLException e) {
-            System.out.println("!!!!!!!!!!!!!! DBSessionDao CONSTRUCTOR ERROR: " + e.toString());
+        } catch (SQLException ignored) {
+
         }
     }
 
