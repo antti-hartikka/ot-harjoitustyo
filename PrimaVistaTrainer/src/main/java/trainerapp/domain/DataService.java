@@ -7,7 +7,7 @@ import trainerapp.dao.UserDao;
 
 import java.util.ArrayList;
 
-public class DataAPI {
+public class DataService {
 
     UserDao userDao = new DBUserDao("jdbc:sqlite:database.db");
     SessionDao sessionDao = new DBSessionDao("jdbc:sqlite:database.db");

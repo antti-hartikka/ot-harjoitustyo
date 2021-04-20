@@ -1,36 +1,26 @@
 package trainerapp.ui;
 
-import com.sun.javafx.scene.control.InputField;
-import javafx.animation.AnimationTimer;
+import com.sun.javafx.binding.StringFormatter;
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import trainerapp.domain.*;
 import javafx.scene.shape.*;
 
-import java.util.concurrent.atomic.LongAccumulator;
-
 public class UserInterface extends Application {
 
     private final Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
     private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
-    private final DataAPI dataAPI = new DataAPI();
-    private final User user = new User("");
+    private final DataService dataService = new DataService();
+    private String user = "";
     private final Statistics statistics = new Statistics();
 
     @Override
@@ -42,7 +32,7 @@ public class UserInterface extends Application {
         selectUserText.setFont(edwin);
 
         ChoiceBox<String> selectUserList = new ChoiceBox<>();
-        selectUserList.getItems().addAll(dataAPI.getAllUsers());
+        selectUserList.getItems().addAll(dataService.getAllUsers());
 
         Button selectUserButton = new Button("select");
         selectUserButton.setFont(edwin);
@@ -128,13 +118,13 @@ public class UserInterface extends Application {
         // -------  event handlers  ----
 
         selectUserButton.setOnAction(actionEvent -> {
-            user.setUsername(selectUserList.getValue());
+            user = selectUserList.getValue();
             borderPane.setCenter(mainMenu);
         });
 
         createUserButton.setOnAction(actionEvent -> {
-            if (dataAPI.createUser(createUserInput.getText())) {
-                user.setUsername(createUserInput.getText());
+            if (dataService.createUser(createUserInput.getText())) {
+                user = createUserInput.getText();
                 borderPane.setCenter(mainMenu);
             } else {
                 createUserErrorMessage.setText("username already taken or too long (20 characters)");

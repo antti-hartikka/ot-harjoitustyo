@@ -1,7 +1,6 @@
 package trainerapp.dao;
 
 import trainerapp.domain.Session;
-import trainerapp.domain.User;
 
 import java.util.ArrayList;
 

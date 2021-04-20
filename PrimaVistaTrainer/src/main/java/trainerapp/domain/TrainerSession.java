@@ -1,18 +1,16 @@
 package trainerapp.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class TrainerSession {
 
     private int[] playedNotes;
     int i = 0;
     private Score score;
-    private final DataAPI dataAPI = new DataAPI();
-    private final User user;
+    private final DataService dataService = new DataService();
+    private final String user;
 
-    public TrainerSession(User user) {
+    public TrainerSession(String user) {
         this.user = user;
     }
 
@@ -31,7 +29,7 @@ public class TrainerSession {
             misses += notes[i] - playedNotes[i];
         }
         int average = misses / notes.length;
-        dataAPI.addSession(new Session(user.name(), LocalDate.now(), average));
+        dataService.addSession(new Session(user, LocalDate.now(), average));
     }
 
     public void resetSession(Score score) {
