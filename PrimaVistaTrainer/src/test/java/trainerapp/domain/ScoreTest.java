@@ -5,6 +5,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import trainerapp.domain.Score;
+
 import static org.junit.Assert.*;
 
 public class ScoreTest {
@@ -33,6 +35,6 @@ public class ScoreTest {
         Score s = new Score();
         s.generate(64);
         int noteCount = s.getNotes().length;
-        assertEquals(noteCount, 64);
+        assertEquals(64, noteCount);
     }
 }
