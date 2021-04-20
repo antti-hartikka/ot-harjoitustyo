@@ -33,8 +33,7 @@ public class TrainerSession {
         dataService.addSession(new Session(user, LocalDate.now(), average));
     }
 
-    public void resetSession(Score score) {
-        this.score = score;
+    public void resetSession() {
         playedNotes = new int[score.getNotes().length];
     }
 
