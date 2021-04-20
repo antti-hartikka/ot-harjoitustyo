@@ -1,8 +1,6 @@
 package trainerapp.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Session {
     private final LocalDate date;

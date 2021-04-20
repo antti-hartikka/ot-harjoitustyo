@@ -1,7 +1,5 @@
 package trainerapp.domain;
 
-import trainerapp.dao.DBSessionDao;
-import trainerapp.dao.DBUserDao;
 import trainerapp.dao.SessionDao;
 import trainerapp.dao.UserDao;
 
@@ -9,8 +7,13 @@ import java.util.ArrayList;
 
 public class DataService {
 
-    UserDao userDao = new DBUserDao("jdbc:sqlite:database.db");
-    SessionDao sessionDao = new DBSessionDao("jdbc:sqlite:database.db");
+    UserDao userDao;
+    SessionDao sessionDao;
+
+    public DataService(UserDao userDao, SessionDao sessionDao) {
+        this.userDao = userDao;
+        this.sessionDao = sessionDao;
+    }
 
     public ArrayList<String> getAllUsers() {
         return userDao.getAllUsers();

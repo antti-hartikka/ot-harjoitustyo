@@ -7,11 +7,12 @@ public class TrainerSession {
     private int[] playedNotes;
     int i = 0;
     private Score score;
-    private final DataService dataService = new DataService();
+    private final DataService dataService;
     private final String user;
 
-    public TrainerSession(String user) {
+    public TrainerSession(String user, DataService dataService) {
         this.user = user;
+        this.dataService = dataService;
     }
 
     public void noteInput(int midiValue) {

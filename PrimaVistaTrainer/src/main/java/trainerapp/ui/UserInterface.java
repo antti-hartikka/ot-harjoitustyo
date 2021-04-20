@@ -1,6 +1,5 @@
 package trainerapp.ui;
 
-import com.sun.javafx.binding.StringFormatter;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+import trainerapp.dao.DBSessionDao;
+import trainerapp.dao.DBUserDao;
 import trainerapp.domain.*;
 import javafx.scene.shape.*;
 
@@ -19,7 +20,7 @@ public class UserInterface extends Application {
 
     private final Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
     private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
-    private final DataService dataService = new DataService();
+    private DataService dataService;
     private String user = "";
     private final Statistics statistics = new Statistics();
 
@@ -107,7 +108,7 @@ public class UserInterface extends Application {
 
         Rectangle highlight = new Rectangle(0, 150, 90, 350);
 
-        TrainerSession session = new TrainerSession(user);
+        TrainerSession session = new TrainerSession(user, dataService);
 
         Scene trainerScene = new Scene(scrollPane);
 
@@ -189,5 +190,12 @@ public class UserInterface extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void init() {
+        DBUserDao userDao = new DBUserDao("jdbc:sqlite:database.db");
+        DBSessionDao sessionDao = new DBSessionDao("jdbc:sqlite:database.db");
+        dataService = new DataService(userDao, sessionDao);
     }
 }
