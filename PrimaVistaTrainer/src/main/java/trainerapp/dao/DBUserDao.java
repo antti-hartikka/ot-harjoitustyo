@@ -40,7 +40,7 @@ public class DBUserDao implements UserDao {
             }
 
         } catch (SQLException e) {
-            System.out.println("Somethin went wrong at DBUserDao.getAllUsers(): " + e.toString());
+            System.out.println("Something went wrong at DBUserDao.getAllUsers(): " + e.toString());
         }
         return users;
     }
