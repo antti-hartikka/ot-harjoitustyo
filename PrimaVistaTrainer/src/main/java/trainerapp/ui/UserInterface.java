@@ -124,6 +124,7 @@ public class UserInterface extends Application {
         });
 
         exit.setOnMouseClicked(mouseEvent -> {
+
             System.exit(0);
         });
 

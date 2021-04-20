@@ -1,6 +1,7 @@
 package trainerapp.domain;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class TrainerSession {
 
@@ -15,6 +16,10 @@ public class TrainerSession {
         this.dataService = dataService;
     }
 
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
     public void noteInput(int midiValue) {
         playedNotes[i] = midiValue;
         i++;
@@ -24,6 +29,7 @@ public class TrainerSession {
     }
 
     public void endSession() {
+        System.out.println(Arrays.toString(playedNotes));
         int[] notes = score.getNotes();
         int misses = 0;
         for (i = 0; i < notes.length; i++) {

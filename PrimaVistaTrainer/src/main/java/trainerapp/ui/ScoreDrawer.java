@@ -24,7 +24,7 @@ public class ScoreDrawer {
     private String fStaff = wideStaff+barLine+fClef;
 
     private Score score;
-    private GraphicsContext gc;
+    private GraphicsContext graphicsContext;
     private int x;
     private final int y;
     Note first;
@@ -32,8 +32,8 @@ public class ScoreDrawer {
     private final int noteStart = 100;
     private final int setX;
 
-    public ScoreDrawer(GraphicsContext gc, int x, int y) {
-        this.gc = gc;
+    public ScoreDrawer(GraphicsContext graphicsContext, int x, int y) {
+        this.graphicsContext = graphicsContext;
         this.x = x;
         this.y = y;
         this.setX = x;
@@ -41,6 +41,7 @@ public class ScoreDrawer {
 
     public void setScore(Score score) {
         this.score = score;
+        score.generate(8);
         int[] notes = score.getNotes();
         first = new Note(notes[0], 4, noteStart, getY(notes[0]));
         Note previousNote = first;
@@ -57,7 +58,7 @@ public class ScoreDrawer {
         String a = staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff;
         String s = gStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+"\n"+
                 fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;
-        gc.fillText(s, x, y);
+        graphicsContext.fillText(s, x, y);
         x += 100;
 
         Note note = first;
@@ -66,7 +67,7 @@ public class ScoreDrawer {
         while(note != null) {
             int val = note.getVal();
             drawLeger(note);
-            gc.fillText(note.toString(), note.getX(), note.getY());
+            graphicsContext.fillText(note.toString(), note.getX(), note.getY());
             note = note.next();
         }
     }
@@ -74,11 +75,11 @@ public class ScoreDrawer {
     private void drawLeger(Note note) {
         int val = note.getVal();
         if (val == 40 || val == 60 || val == 81) {
-            gc.fillText(leger, note.getX(), note.getY());
+            graphicsContext.fillText(leger, note.getX(), note.getY());
         } else if (val == 38) {
-            gc.fillText(leger, note.getX(), note.getY() - 10);
+            graphicsContext.fillText(leger, note.getX(), note.getY() - 10);
         } else if (val == 83) {
-            gc.fillText(leger, note.getX(), note.getY() + 10);
+            graphicsContext.fillText(leger, note.getX(), note.getY() + 10);
         }
     }
 
