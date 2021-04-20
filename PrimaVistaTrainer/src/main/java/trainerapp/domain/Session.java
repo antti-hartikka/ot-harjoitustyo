@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class Session {
     private final LocalDate date;
-    private final int averageMiss;
+    private final double averageMiss;
     private final String user;
 
-    public Session(String user, LocalDate date, int averageMiss) {
+    public Session(String user, LocalDate date, double averageMiss) {
         this.date = date;
         this.averageMiss = averageMiss;
         this.user = user;
@@ -19,7 +19,7 @@ public class Session {
         return date;
     }
 
-    public int getAverageMiss() {
+    public double getAverageMiss() {
         return averageMiss;
     }
 
