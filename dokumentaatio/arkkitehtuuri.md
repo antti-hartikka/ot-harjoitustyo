@@ -1,2 +1,2 @@
-[kuva sovelluksen arkkitehtuurista](/arkkitehtuuri.png)
+![kuva sovelluksen arkkitehtuurista](/arkkitehtuuri.png)
 
