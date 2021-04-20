@@ -8,3 +8,4 @@
 | 30. maaliskuuta 2021 | 6 | luokkien score ja scoredrawer toteutusta. nuottien generointi onnistuu |
 | 13. huhtikuuta 2021  | 8 | refaktorointa, note-luokan luonti, testien kanssa säätämistä |
 | 15. huhtikuuta 2021  | 9 | Dao-puolen totetutus, valikon ja käyttäjän valinna toteutus, erilaiset pienet toiminnot|
+| 20. huhtikuuta 2021  | 8 | Testien kirjoittelua, refaktorointia, midipuolen tutkimista ja toteutusta|
