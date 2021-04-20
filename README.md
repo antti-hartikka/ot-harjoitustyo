@@ -11,9 +11,11 @@ Sovellus generoi tällä hetkellä nuotteja käyttäjälleen C-duurissa ja käyt
 
 ---
 
-[Vaativuusmäärittely](https://github.com/antti-hartikka/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Vaativuusmäärittely](/dokumentaatio/vaatimusmaarittely.md)
 
-[Tuntikirjanpito](https://github.com/antti-hartikka/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+[Tuntikirjanpito](/dokumentaatio/tuntikirjanpito.md)
+
+[Arkkitehtuurikuvaus](/dokumentaatio/arkkitehtuuri.md)
 
 ## Komentorivitoiminnot
 
