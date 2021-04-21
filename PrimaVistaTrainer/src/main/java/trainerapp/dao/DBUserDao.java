@@ -17,7 +17,7 @@ public class DBUserDao implements UserDao {
     }
 
     public boolean createUser(String username) {
-        if (username.length() > 20 || !username.matches("[a-zA-Z0-9]{3,20}")) {
+        if (!username.matches("[a-zA-Z0-9]{3,20}")) {
             return false;
         }
         try {
