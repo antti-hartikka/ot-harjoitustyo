@@ -1,4 +1,4 @@
-package trainerapp.domain;
+package trainerapp.ui;
 
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
@@ -8,8 +8,9 @@ import java.util.List;
 
 public class MidiService {
 
-    public void openMidiDevice(TrainerSession session) {
-        MidiDevice device;
+    private MidiDevice device;
+
+    public void openMidiDevice(Trainer trainer) {
         MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
         for (int i = 0; i < infos.length; i++) {
             try {
@@ -20,12 +21,12 @@ public class MidiService {
 
                 for (Transmitter transmitter : transmitters) {
                     transmitter.setReceiver(
-                            new MidiInputReceiver(session)
+                            new MidiInputReceiver(trainer)
                     );
                 }
 
                 Transmitter transmitter = device.getTransmitter();
-                transmitter.setReceiver(new MidiInputReceiver(session));
+                transmitter.setReceiver(new MidiInputReceiver(trainer));
 
                 device.open();
 
@@ -33,6 +34,10 @@ public class MidiService {
             }
         }
 
+    }
+
+    public void closeMidiDevice() {
+        device.close();
     }
 
 }

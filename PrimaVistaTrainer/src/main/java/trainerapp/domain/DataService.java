@@ -23,11 +23,11 @@ public class DataService {
         return userDao.createUser(username);
     }
 
-    ArrayList<Session> getSessions(String username) {
+    public ArrayList<Session> getSessions(String username) {
         return sessionDao.getSessions(username);
     }
 
-    void addSession(Session session) {
+    public void addSession(Session session) {
         sessionDao.addSession(session);
     }
 

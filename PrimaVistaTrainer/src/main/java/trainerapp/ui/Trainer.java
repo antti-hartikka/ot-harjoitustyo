@@ -9,16 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import trainerapp.domain.MidiInputReceiver;
-import trainerapp.domain.MidiService;
 import trainerapp.domain.Score;
 import trainerapp.domain.TrainerSession;
-
-import javax.sound.midi.MidiDevice;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Transmitter;
-import java.util.List;
 
 public class Trainer {
 
@@ -32,15 +24,14 @@ public class Trainer {
     TrainerSession trainerSession;
     Scene scene = new Scene(scrollPane);
     private final MidiService midiService = new MidiService();
-    private final Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
+    private int noteCount = 32;
 
-    public Trainer(TrainerSession trainerSession) {
-        this.trainerSession = trainerSession;
-        trainerSession.setScore(score);
+    public Trainer() {
 
         canvas = new Canvas(5000, 700);
         graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.BLACK);
+        Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
         graphicsContext.setFont(bravura);
 
         scoreDrawer = new ScoreDrawer(graphicsContext, 30, 300);
@@ -56,12 +47,14 @@ public class Trainer {
     }
 
     public Scene startTraining() {
+        trainerSession.setScore(score);
+
         graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         pane.getChildren().clear();
         pane.getChildren().add(canvas);
 
-        score.generate(64);
+        score.generate(noteCount);
         trainerSession.resetSession();
         scoreDrawer.draw();
 
@@ -70,7 +63,7 @@ public class Trainer {
 
         pane.getChildren().add(highlight);
 
-        midiService.openMidiDevice(trainerSession);
+        midiService.openMidiDevice(this);
 
         return scene;
     }
@@ -125,4 +118,21 @@ public class Trainer {
         highlight.setTranslateX(highlight.getTranslateX() + 75);
     }
 
+    public void setNoteCount(int noteCount) {
+        this.noteCount = noteCount;
+    }
+
+    public void endTraining() {
+        midiService.closeMidiDevice();
+        trainerSession.endSession();
+    }
+
+    public void handleMidiNote(byte midiValue) {
+        moveHighlight();
+        trainerSession.noteInput(midiValue);
+    }
+
+    public void setTrainerSession(TrainerSession trainerSession) {
+        this.trainerSession = trainerSession;
+    }
 }

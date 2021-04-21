@@ -1,4 +1,7 @@
-package trainerapp.domain;
+package trainerapp.ui;
+
+import trainerapp.domain.TrainerSession;
+import trainerapp.ui.Trainer;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
@@ -6,15 +9,15 @@ import java.util.Arrays;
 
 public class MidiInputReceiver implements Receiver {
 
-    private TrainerSession trainerSession;
+    private Trainer trainer;
 
-    public MidiInputReceiver(TrainerSession trainerSession) {
-        this.trainerSession = trainerSession;
+    public MidiInputReceiver(Trainer trainer) {
+        this.trainer = trainer;
     }
 
     public void send(MidiMessage msg, long timeStamp) {
         if (msg.getMessage()[0] == -112) {
-            trainerSession.noteInput(msg.getMessage()[1]);
+            trainer.handleMidiNote(msg.getMessage()[1]);
         }
     }
 

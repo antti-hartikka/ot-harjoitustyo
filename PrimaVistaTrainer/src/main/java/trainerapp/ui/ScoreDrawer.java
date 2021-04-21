@@ -17,8 +17,8 @@ public class ScoreDrawer {
     private final String finalBarline = "\uE032";
     private final String timeSigCommon = "\uE08A";
     private final String accidentalFlat = "\uE260";
-    private final String accidntalNatural = "\uE261";
-    private final String accindentalSharp = "\uE262";
+    private final String accidentalNatural = "\uE261";
+    private final String accidentalSharp= "\uE262";
 
     private String gStaff = wideStaff+barLine+gClef;
     private String fStaff = wideStaff+barLine+fClef;
@@ -30,18 +30,20 @@ public class ScoreDrawer {
     Note first;
     private final int space = 75;
     private final int noteStart = 100;
-    private final int setX;
+    private final int initX;
 
     public ScoreDrawer(GraphicsContext graphicsContext, int x, int y) {
         this.graphicsContext = graphicsContext;
         this.x = x;
         this.y = y;
-        this.setX = x;
+        this.initX = x;
     }
 
     public void setScore(Score score) {
         this.score = score;
-        score.generate(8);
+    }
+
+    public void draw() {
         int[] notes = score.getNotes();
         first = new Note(notes[0], 4, noteStart, getY(notes[0]));
         Note previousNote = first;
@@ -51,10 +53,8 @@ public class ScoreDrawer {
             newNote.setPrevious(previousNote);
             previousNote = previousNote.next();
         }
-        this.x = setX;
-    }
-
-    public void draw() {
+        this.x = initX;
+        x = initX;
         String a = staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff;
         String s = gStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+"\n"+
                 fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;

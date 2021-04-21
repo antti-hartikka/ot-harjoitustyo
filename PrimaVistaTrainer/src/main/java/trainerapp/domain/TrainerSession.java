@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class TrainerSession {
 
     private int[] playedNotes;
-    int i = 0;
+    int noteCount = 0;
     private Score score;
     private final DataService dataService;
     private final String user;
@@ -21,26 +21,37 @@ public class TrainerSession {
     }
 
     public void noteInput(int midiValue) {
-        playedNotes[i] = midiValue;
-        i++;
-        if (i == playedNotes.length) {
+        playedNotes[noteCount] = midiValue;
+        noteCount++;
+        if (noteCount == playedNotes.length) {
             endSession();
         }
     }
 
     public void endSession() {
-        System.out.println(Arrays.toString(playedNotes));
         int[] notes = score.getNotes();
-        int misses = 0;
-        for (i = 0; i < notes.length; i++) {
-            misses += notes[i] - playedNotes[i];
+        double misses = 0;
+        int count = 0;
+        for (int i = 0; i < notes.length; i++) {
+            if (playedNotes[i] == -1) {  // -1 means that training was not completed to end
+                break;
+            } else if (playedNotes[i] < 12) {  // this means the input type was keyboard
+                misses += (notes[i] % 12) - playedNotes[i];
+                count++;
+            } else {  // input type is midi device
+                misses += notes[i] - playedNotes[i];
+                count++;
+            }
         }
-        int average = misses / notes.length;
+        double average = misses / count;
+        System.out.println("addSession: " + user);
         dataService.addSession(new Session(user, LocalDate.now(), average));
     }
 
     public void resetSession() {
         playedNotes = new int[score.getNotes().length];
+        Arrays.fill(playedNotes, -1);
+        noteCount = 0;
     }
 
 }

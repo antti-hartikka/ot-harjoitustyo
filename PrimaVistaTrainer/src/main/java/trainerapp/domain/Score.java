@@ -1,6 +1,5 @@
 package trainerapp.domain;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Score {
@@ -9,12 +8,7 @@ public class Score {
     private int noteBoundHigh = 83;
     private int[] notes;
     private int[] scale;
-    private boolean[] isFlat;
-    private boolean[] isNormalized;
-    private boolean[] isSharp;
     private int[] degrees;
-    private boolean[] flats = new boolean[7];
-    private boolean[] sharps = new boolean[7];
 
     // sets scale to C major
     public Score() {
@@ -25,14 +19,6 @@ public class Score {
     public Score(int[] scale, int[] degrees) {
         this.scale = scale;
         this.degrees = degrees;
-    }
-
-    public void setFlats(boolean[] flats) {
-        this.flats = flats;
-    }
-
-    public void setSharps(boolean[] sharps) {
-        this.sharps = sharps;
     }
 
     public void generate(int noteCount) {
@@ -70,12 +56,6 @@ public class Score {
 
     public int getDegrees(int note) {
         return degrees[note % 12];
-    }
-
-    public static void main(String[] args) {
-        Score s = new Score();
-        s.generate(32);
-        System.out.println(Arrays.toString(s.notes));
     }
 
 }
