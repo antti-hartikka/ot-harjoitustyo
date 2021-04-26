@@ -20,15 +20,12 @@ public class Statistics {
         NumberAxis y = new NumberAxis();
 
         x.setLabel("time");
-        y.setLabel("average miss");
+        y.setLabel("average miss (semitones)");
 
         LineChart<String, Number> chart = new LineChart<>(x, y);
         chart.setTitle("progress of user " + username);
         chart.setLegendVisible(false);
         chart.setCreateSymbols(false);
-
-        System.out.println(username);
-        System.out.println(dataService.getSessions(username).size());
 
         XYChart.Series<String, Number> data = new XYChart.Series<>();
         for (Session s : dataService.getSessions(username)) {
