@@ -9,3 +9,5 @@
 | 13. huhtikuuta 2021  | 8 | refaktorointa, note-luokan luonti, testien kanssa säätämistä |
 | 15. huhtikuuta 2021  | 9 | Dao-puolen totetutus, valikon ja käyttäjän valinna toteutus, erilaiset pienet toiminnot|
 | 20. huhtikuuta 2021  | 8 | Testien kirjoittelua, refaktorointia, midipuolen tutkimista ja toteutusta|
+| 26. huhtikuuta 2021  | 8 | Statistiikkan esityksen toteutus, midi-puoli ja scrollaus kunnossa. |
+| yhteensä | 51 |

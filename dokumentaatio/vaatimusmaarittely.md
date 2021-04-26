@@ -26,10 +26,10 @@ Käyttöliittymä on graafinen ja sisältää neljä eri näkymää:
 
 * käyttäjän syötteen lukeminen 
  * näppäimistöltä - tehty
- * usb-midi-väylästä
-* järkevän "kappaleen" generointi ja nuottien tulostus - tehty
-* soittotarkkuuden tallentaminen
-* nuottigeneraattorin asetukset käyttäjälle
-* tilastojen näyttäminen käyttäjälle
+ * usb-midi-väylästä – tehty
+* järkevän "kappaleen" generointi ja nuottien tulostus - tehty, mutta vain C-duuri toteutettu
+* soittotarkkuuden tallentaminen – tehty
+* nuottigeneraattorin asetukset käyttäjälle – ainoa asetus tällä hetkellä on vain generoitavien nuottien lukumäärä
+* tilastojen näyttäminen käyttäjälle – tehty
 * käyttöliittymän ulkonäön muuttaminen (day/night mode)
     
