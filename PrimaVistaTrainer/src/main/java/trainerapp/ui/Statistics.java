@@ -7,9 +7,6 @@ import javafx.scene.chart.XYChart;
 import trainerapp.domain.DataService;
 import trainerapp.domain.Session;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Statistics {
 
     private DataService dataService;
@@ -27,6 +24,8 @@ public class Statistics {
 
         LineChart<String, Number> chart = new LineChart<>(x, y);
         chart.setTitle("progress of user " + username);
+        chart.setLegendVisible(false);
+        chart.setCreateSymbols(false);
 
         System.out.println(username);
         System.out.println(dataService.getSessions(username).size());

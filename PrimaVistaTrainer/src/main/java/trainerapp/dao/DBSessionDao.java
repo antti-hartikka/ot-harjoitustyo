@@ -18,7 +18,7 @@ public class DBSessionDao implements SessionDao {
                             "id INTEGER PRIMARY KEY, " +
                             "user_id INTEGER, " +
                             "average_miss REAL, " +
-                            "date DATE, " +
+                            "timestamp TIMESTAMP, " +
                             "FOREIGN KEY (user_id) REFERENCES Users(id)" +
                             ")"
             );
@@ -31,7 +31,7 @@ public class DBSessionDao implements SessionDao {
         ArrayList<Session> list = new ArrayList<>();
         try {
             PreparedStatement s = db.prepareStatement(
-                    "SELECT Users.username, Sessions.date, Sessions.average_miss " +
+                    "SELECT Users.username, Sessions.timestamp, Sessions.average_miss " +
                     "FROM Sessions " +
                     "JOIN Users ON Users.id = Sessions.user_id " +
                     "WHERE Users.username=?"
@@ -41,13 +41,14 @@ public class DBSessionDao implements SessionDao {
             while (r.next()) {
                 Session session = new Session(
                         r.getString(1),
-                        r.getDate(2).toLocalDate(),
+                        r.getTimestamp(2).toLocalDateTime(),
                         r.getDouble(3)
                 );
                 list.add(session);
             }
         } catch (SQLException e) {
             System.out.println("Something went wrong at DBSessionDao.getSessions: " + e.toString());
+            e.printStackTrace();
         }
         return list;
     }
@@ -55,12 +56,12 @@ public class DBSessionDao implements SessionDao {
     public void addSession(Session session) {
         try {
             PreparedStatement s = db.prepareStatement(
-                    "INSERT INTO Sessions (user_id, average_miss, date) " +
+                    "INSERT INTO Sessions (user_id, average_miss, timestamp) " +
                             "VALUES ((SELECT id FROM Users WHERE username=?), ?, ?)"
             );
             s.setString(1, session.getUser());
             s.setDouble(2, session.getAverageMiss());
-            s.setDate(3, Date.valueOf(session.getDate()));
+            s.setDate(3, new Date(System.currentTimeMillis()));
             s.execute();
         } catch (SQLException e) {
             System.out.println("Something went wrong at DBSessionDao.addSession: " + e.toString());

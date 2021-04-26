@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DBSessionDaoTest {
 
@@ -51,7 +52,7 @@ public class DBSessionDaoTest {
                             "id INTEGER PRIMARY KEY, " +
                             "user_id INTEGER, " +
                             "average_miss REAL, " +
-                            "date DATE, " +
+                            "timestamp TIMESTAMP, " +
                             "FOREIGN KEY (user_id) REFERENCES Users(id)" +
                             ")"
             );
@@ -68,17 +69,17 @@ public class DBSessionDaoTest {
 
     @Test
     public void addingSessionAddsSessionToDB() {
-        Session session = new Session("testUser", LocalDate.now(), 0.23);
+        Session session = new Session("testUser", LocalDateTime.now(), 0.23);
         dao.addSession(session);
         assertEquals(1, dao.getSessions("testUser").size());
     }
 
     @Test
     public void getSessionsReturnsCorrectAmountOfSessions() {
-        dao.addSession(new Session("testUser", LocalDate.now(), 1.34));
-        dao.addSession(new Session("testUser", LocalDate.now(), 4.345));
-        dao.addSession(new Session("testUser", LocalDate.now(), 0.62));
-        dao.addSession(new Session("testUser", LocalDate.now(), 8.957));
+        dao.addSession(new Session("testUser", LocalDateTime.now(), 1.34));
+        dao.addSession(new Session("testUser", LocalDateTime.now(), 4.345));
+        dao.addSession(new Session("testUser", LocalDateTime.now(), 0.62));
+        dao.addSession(new Session("testUser", LocalDateTime.now(), 8.957));
         assertEquals(4, dao.getSessions("testUser").size());
     }
 

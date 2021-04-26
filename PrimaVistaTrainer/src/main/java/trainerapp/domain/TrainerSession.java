@@ -1,6 +1,7 @@
 package trainerapp.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class TrainerSession {
@@ -36,16 +37,16 @@ public class TrainerSession {
             if (playedNotes[i] == -1) {  // -1 means that training was not completed to end
                 break;
             } else if (playedNotes[i] < 12) {  // this means the input type was keyboard
-                misses += (notes[i] % 12) - playedNotes[i];
+                misses += Math.abs((notes[i] % 12) - playedNotes[i]);
                 count++;
             } else {  // input type is midi device
-                misses += notes[i] - playedNotes[i];
+                misses += Math.abs(notes[i] - playedNotes[i]);
                 count++;
             }
         }
         double average = misses / count;
         System.out.println("addSession: " + user);
-        dataService.addSession(new Session(user, LocalDate.now(), average));
+        dataService.addSession(new Session(user, LocalDateTime.now(), average));
     }
 
     public void resetSession() {
