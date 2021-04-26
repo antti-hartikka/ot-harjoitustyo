@@ -66,14 +66,10 @@ public class DBSessionDaoTest {
 
     @Test
     public void getSessionsReturnsCorrectAmountOfSessions() {
-        Session session1 = new Session("testUser", LocalDate.now(), 1.34);
-        Session session2 = new Session("testUser", LocalDate.now(), 4.345);
-        Session session3 = new Session("testUser", LocalDate.now(), 0.62);
-        Session session4 = new Session("testUser", LocalDate.now(), 8.957);
-        dao.addSession(session1);
-        dao.addSession(session2);
-        dao.addSession(session3);
-        dao.addSession(session4);
+        dao.addSession(new Session("testUser", LocalDate.now(), 1.34));
+        dao.addSession(new Session("testUser", LocalDate.now(), 4.345));
+        dao.addSession(new Session("testUser", LocalDate.now(), 0.62));
+        dao.addSession(new Session("testUser", LocalDate.now(), 8.957));
         assertEquals(4, dao.getSessions("testUser").size());
     }
 
