@@ -26,9 +26,12 @@ public class DBSessionDaoTest {
     public DBSessionDaoTest() {
         try {
             db = DriverManager.getConnection("jdbc:sqlite:test.db");
-            dao = new DBSessionDao("jdbc:sqlite:test.db");
+            Statement s = db.createStatement();
+            s.execute("CREATE TABLE Users (id INTEGER PRIMARY KEY, username TEXT UNIQUE)");
+
         } catch (SQLException ignored) {
         }
+        dao = new DBSessionDao("jdbc:sqlite:test.db");
     }
 
     @BeforeClass
@@ -44,18 +47,8 @@ public class DBSessionDaoTest {
     public void setUp() {
         try {
             Statement s = db.createStatement();
-            s.execute("DROP TABLE Sessions");
-            s.execute("DROP TABLE Users");
-            s.execute("CREATE TABLE Users (id INTEGER PRIMARY KEY, username TEXT UNIQUE)");
-            s.execute(
-                    "CREATE TABLE Sessions (" +
-                            "id INTEGER PRIMARY KEY, " +
-                            "user_id INTEGER, " +
-                            "average_miss REAL, " +
-                            "timestamp TIMESTAMP, " +
-                            "FOREIGN KEY (user_id) REFERENCES Users(id)" +
-                            ")"
-            );
+            s.execute("DELETE FROM Sessions");
+            s.execute("DELETE FROM Users");
             s.execute("INSERT INTO Users (username) VALUES ('testUser')");
         } catch (SQLException ignored) {
 

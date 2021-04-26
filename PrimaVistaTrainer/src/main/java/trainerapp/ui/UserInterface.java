@@ -181,7 +181,9 @@ public class UserInterface extends Application {
 
         trainerScene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                trainer.endTraining();
+                if (!session.isEnded()) {
+                    trainer.endTraining();
+                }
                 primaryStage.setScene(mainScene);
             } else {
                 trainer.handleKeyEvent(keyEvent);

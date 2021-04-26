@@ -130,7 +130,6 @@ public class Trainer {
     }
 
     public void handleMidiNote(byte midiValue) {
-        moveHighlight();
         handleNote(midiValue);
     }
 
