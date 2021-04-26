@@ -197,6 +197,7 @@ public class UserInterface extends Application {
                 noteCountErrorMessage.setText("nope");
             }
         });
+
     }
 
     public static void main(String[] args) {

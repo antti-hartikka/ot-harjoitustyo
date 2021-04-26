@@ -11,7 +11,7 @@ public class ScoreDrawer {
     private final String noteQuarterUp = "\uE1D5";
     private final String noteQuarterDown = "\uE1D6";
     private final String leger = "\uE022";
-    private final String staff = "\uE014-";
+    private final String staff = "\uE014-\uE014-\uE014-\uE014-";
     private final String wideStaff = "\uE01A";
     private final String narrowStaff = "\uE020";
     private final String finalBarline = "\uE032";
@@ -29,7 +29,7 @@ public class ScoreDrawer {
     private final int y;
     Note first;
     private final int space = 75;
-    private final int noteStart = 100;
+    private final int noteStart = 200;
     private final int initX;
 
     public ScoreDrawer(GraphicsContext graphicsContext, int x, int y) {
@@ -55,10 +55,11 @@ public class ScoreDrawer {
         }
         this.x = initX;
         x = initX;
-        String a = staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff+staff;
-        String s = gStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+"\n"+
-                fStaff+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a;
-        graphicsContext.fillText(s, x, y);
+
+
+        graphicsContext.fillText(
+                gStaff + staff.repeat(notes.length + 1) + "-" + barLine + "\n" + fStaff + staff.repeat(notes.length + 1) + "-" + barLine,
+                x, y);
         x += 100;
 
         Note note = first;

@@ -5,22 +5,26 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import trainerapp.domain.Score;
 import trainerapp.domain.TrainerSession;
 
 public class Trainer {
 
+    private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
+    private final Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
     GraphicsContext graphicsContext;
     Canvas canvas;
     Pane pane = new Pane();
     ScrollPane scrollPane = new ScrollPane();
     Score score = new Score();
     ScoreDrawer scoreDrawer;
-    Rectangle highlight = new Rectangle(0, 150, 90, 350);
+    Rectangle highlight = new Rectangle(100, 150, 90, 350);
     TrainerSession trainerSession;
     Scene scene = new Scene(scrollPane);
     private final MidiService midiService = new MidiService();
@@ -31,7 +35,6 @@ public class Trainer {
         canvas = new Canvas(5000, 700);
         graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.BLACK);
-        Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
         graphicsContext.setFont(bravura);
 
         scoreDrawer = new ScoreDrawer(graphicsContext, 30, 300);
@@ -69,7 +72,6 @@ public class Trainer {
     }
 
     public void handleKeyEvent(KeyEvent keyEvent) {
-        moveHighlight();
         int v = -1;
         switch (keyEvent.getCode()) {
             case A:
@@ -111,7 +113,7 @@ public class Trainer {
             default:
                 break;
         }
-        trainerSession.noteInput(v);
+        handleNote(v);
     }
 
     public void moveHighlight() {
@@ -129,10 +131,35 @@ public class Trainer {
 
     public void handleMidiNote(byte midiValue) {
         moveHighlight();
-        trainerSession.noteInput(midiValue);
+        handleNote(midiValue);
+    }
+
+    private void handleNote(int noteValue) {
+        double d = 1 / (canvas.getWidth() / 75);
+        if (scrollPane.getHvalue() + d < scrollPane.getHmax()) {
+            scrollPane.setHvalue(scrollPane.getHvalue() + d);
+        }
+        moveHighlight();
+        trainerSession.noteInput(noteValue);
+        if (trainerSession.isEnded()) {
+            midiService.closeMidiDevice();
+            graphicsContext.clearRect(0, 0, 5000, 600);
+            highlight.setTranslateX(2000);
+            scrollPane.setHvalue(0);
+            graphicsContext.setFont(edwin);
+            graphicsContext.fillText("press escape to continue", 300, 300);
+            graphicsContext.setFont(bravura);
+            return;
+        }
     }
 
     public void setTrainerSession(TrainerSession trainerSession) {
         this.trainerSession = trainerSession;
+    }
+
+    private Text text(String s) {
+        Text text = new Text(s);
+        text.setFont(edwin);
+        return text;
     }
 }
