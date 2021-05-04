@@ -10,4 +10,6 @@
 | 15. huhtikuuta 2021  | 9 | Dao-puolen totetutus, valikon ja käyttäjän valinna toteutus, erilaiset pienet toiminnot|
 | 20. huhtikuuta 2021  | 8 | Testien kirjoittelua, refaktorointia, midipuolen tutkimista ja toteutusta|
 | 26. huhtikuuta 2021  | 8 | Statistiikkan esityksen toteutus, midi-puoli ja scrollaus kunnossa. |
-| yhteensä | 51 |
+| 3. toukokuuta 2021 | 6 | Eri sävellajien toteutus |
+| 4. toukokuuta 2021 | 6 | Testauksen, javadocin, ja dokumentaation laatimista.|
+| yhteensä | 63 |
