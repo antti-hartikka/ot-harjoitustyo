@@ -7,6 +7,10 @@ public class DBUserDao implements UserDao {
 
     Connection db;
 
+    /**
+     * Data Access Object for storing and accessing user related data using SQLite database.
+     * @param url Url to database where this class will be connected
+     */
     public DBUserDao(String url) {
         try {
             db = DriverManager.getConnection(url);
@@ -16,6 +20,11 @@ public class DBUserDao implements UserDao {
         }
     }
 
+    /**
+     * Method for creating new user to the database.
+     * @param username Username to be added to database
+     * @return Returns false if username already exists or don't pass validation([a-zA-Z0-9]{3,20})
+     */
     public boolean createUser(String username) {
         if (!username.matches("[a-zA-Z0-9]{3,20}")) {
             return false;
@@ -32,6 +41,10 @@ public class DBUserDao implements UserDao {
         return true;
     }
 
+    /**
+     * Method to get all users as ArrayList
+     * @return ArrayList contains all the usernames
+     */
     public ArrayList<String> getAllUsers() {
         ArrayList<String> users = new ArrayList<>();
         try {

@@ -7,4 +7,9 @@
 <suppressions>
     <suppress files="trainerapp.ui.ScoreDrawer.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="trainerapp.ui.UserInterface.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="trainerapp.ui.Trainer.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="trainerapp.ui.MidiInputReceiver.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="trainerapp.ui.MidiService.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="trainerapp.ui.Note.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="trainerapp.ui.Statistics.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

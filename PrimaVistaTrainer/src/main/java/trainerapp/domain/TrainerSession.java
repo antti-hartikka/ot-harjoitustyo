@@ -12,6 +12,11 @@ public class TrainerSession {
     private final String user;
     private boolean isEnded = false;
 
+    /**
+     * This class is used to manage training session data. Takes input values and stores session when ended.
+     * @param user Username of current user
+     * @param dataService Data service object for data storing
+     */
     public TrainerSession(String user, DataService dataService) {
         this.user = user;
         this.dataService = dataService;
@@ -21,6 +26,11 @@ public class TrainerSession {
         this.score = score;
     }
 
+    /**
+     * Takes input value and checks if score is in the end.
+     * @param midiValue Input value as a midi standard.
+     *                  Values 0...11 can be used to represent plain note values without octave.
+     */
     public void noteInput(int midiValue) {
         if (isEnded) {
             return;
@@ -32,10 +42,17 @@ public class TrainerSession {
         }
     }
 
+    /**
+     * This can be used to check if session is ended
+     * @return Returns true if session is ended.
+     */
     public boolean isEnded() {
         return isEnded;
     }
 
+    /**
+     * Sets isEnded to true, calculates average miss and stores session object to data service.
+     */
     public void endSession() {
         isEnded = true;
         int[] notes = score.getNotes();
@@ -56,6 +73,9 @@ public class TrainerSession {
         dataService.addSession(new Session(user, LocalDateTime.now(), average));
     }
 
+    /**
+     * Resets all variables for new session. Call this after new score is generated.
+     */
     public void resetSession() {
         isEnded = false;
         playedNotes = new int[score.getNotes().length];

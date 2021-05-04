@@ -9,6 +9,10 @@ public class DBSessionDao implements SessionDao {
 
     Connection db;
 
+    /**
+     * Data Access Object for storing and accessing session related data using SQLite database.
+     * @param url Url to database where this class will be connected
+     */
     public DBSessionDao(String url) {
         try {
             db = DriverManager.getConnection(url);
@@ -27,6 +31,11 @@ public class DBSessionDao implements SessionDao {
         }
     }
 
+    /**
+     * This method fetches all session objects from database that matches given username.
+     * @param username Username to filter results
+     * @return All matching sessions as ArrayList
+     */
     public ArrayList<Session> getSessions(String username) {
         ArrayList<Session> list = new ArrayList<>();
         try {
@@ -53,6 +62,10 @@ public class DBSessionDao implements SessionDao {
         return list;
     }
 
+    /**
+     * Adds single session to database
+     * @param session Session object for database insertion
+     */
     public void addSession(Session session) {
         try {
             PreparedStatement s = db.prepareStatement(
