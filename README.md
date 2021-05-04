@@ -19,6 +19,8 @@ Tietokoneen näppäimistölläkin voi soittaa. Nuoteille on asetettu loogiset n�
 
 [Arkkitehtuurikuvaus](/dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](/dokumentaatio/kayttoohje.md)
+
 ## Komentorivitoiminnot
 
 ---
@@ -37,6 +39,16 @@ mvn test
 Testikattavuusraportin saa komennolla
 ```
 mvn test jacoco:report
+```
+
+Checkstylen voi suorittaa komennolla
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+
+JavaDocin generointi suoritetaan komennolla
+```
+mvn javadoc:javadoc
 ```
 
 Jar-tiedoston luonti onnistuu komennolla 
