@@ -1,5 +1,6 @@
 package trainerapp.domain;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Score {
@@ -14,11 +15,6 @@ public class Score {
     public Score() {
         scale = new int[]{0, 2, 4, 5, 7, 9, 11};
         degrees = new int[]{0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6};
-    }
-
-    public Score(int[] scale, int[] degrees) {
-        this.scale = scale;
-        this.degrees = degrees;
     }
 
     public void generate(int noteCount) {
@@ -54,8 +50,31 @@ public class Score {
         return scale;
     }
 
-    public int getDegrees(int note) {
+    public int getNoteDegrees(int note) {
         return degrees[note % 12];
+    }
+
+    public void setScale(int root, String mode) {
+        int[] cMajor = new int[]{0, 2, 4, 5, 7, 9, 11};
+        int[] majorDegrees = new int[]{0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6};
+
+        int[] cMinor = new int[]{0, 2, 3, 5, 7, 8, 10};
+        int[] minorDegrees = new int[]{0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6};
+
+        if (mode.equals("major")) {
+            scale = Arrays.stream(cMajor)
+                    .map(note -> (note + root) % 12)
+                    .toArray();
+            degrees = majorDegrees;
+        }
+
+        if (mode.equals("minor")) {
+            scale = Arrays.stream(cMinor)
+                    .map(note -> (note + root) % 12)
+                    .toArray();
+            degrees = minorDegrees;
+        }
+
     }
 
 }

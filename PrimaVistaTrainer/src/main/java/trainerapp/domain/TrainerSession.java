@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class TrainerSession {
 
     private int[] playedNotes;
-    int noteCount = 0;
+    private int noteCount = 0;
     private Score score;
     private final DataService dataService;
     private final String user;

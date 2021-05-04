@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class DataService {
 
-    UserDao userDao;
-    SessionDao sessionDao;
+    private final UserDao userDao;
+    private final SessionDao sessionDao;
 
     public DataService(UserDao userDao, SessionDao sessionDao) {
         this.userDao = userDao;
