@@ -14,6 +14,8 @@ import trainerapp.dao.DBSessionDao;
 import trainerapp.dao.DBUserDao;
 import trainerapp.domain.*;
 
+import java.util.Arrays;
+
 public class UserInterface extends Application {
 
     private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
@@ -112,11 +114,33 @@ public class UserInterface extends Application {
 
         HBox noteCountSettingBox = new HBox();
         noteCountSettingBox.getChildren().add(text("notes per training session"));
-        TextField noteCountInput = new TextField("32");
+        TextField noteCountInput = textField("32");
         noteCountSettingBox.getChildren().add(noteCountInput);
         Text noteCountErrorMessage = errorText(null);
         noteCountSettingBox.getChildren().add(noteCountErrorMessage);
         settingsMenu.getChildren().add(noteCountSettingBox);
+
+        HBox scaleSelectionBox = new HBox();
+        scaleSelectionBox.setSpacing(3);
+        ChoiceBox<String> root = new ChoiceBox<>();
+        root.getItems().addAll(Arrays.asList(
+                "C", "D", "E", "F", "G", "A", "B"
+        ));
+        scaleSelectionBox.getChildren().add(root);
+        ChoiceBox<String> accidental = new ChoiceBox<>();
+        accidental.getItems().addAll(Arrays.asList(
+                "neutral", "sharp", "flat"
+        ));
+        scaleSelectionBox.getChildren().add(accidental);
+        ChoiceBox<String> mode = new ChoiceBox<>();
+        mode.getItems().addAll(Arrays.asList(
+                "major", "minor"
+        ));
+        scaleSelectionBox.getChildren().add(mode);
+        Button setScaleButton = button("set scale");
+        scaleSelectionBox.getChildren().add(setScaleButton);
+        settingsMenu.getChildren().add(scaleSelectionBox);
+
         Text mainMenuText = text("back to main menu");
         settingsMenu.getChildren().add(mainMenuText);
 
@@ -200,6 +224,29 @@ public class UserInterface extends Application {
             }
         });
 
+        setScaleButton.setOnMouseClicked(event -> {
+            int rootNote = getRootNote(root.getValue());
+            if (accidental.getValue().equals("sharp")) {
+                rootNote = (rootNote + 1) % 12;
+            } else if (accidental.getValue().equals("flat")) {
+                rootNote = (rootNote + 11) % 12;
+            }
+            trainer.getScore().setScale(rootNote, mode.getValue());
+        });
+
+    }
+
+    private int getRootNote(String value) {
+        switch (value) {
+            case "C": return 0;
+            case "D": return 2;
+            case "E": return 4;
+            case "F": return 5;
+            case "G": return 7;
+            case "A": return 9;
+            case "B": return 11;
+        }
+        return -1;
     }
 
     public static void main(String[] args) {

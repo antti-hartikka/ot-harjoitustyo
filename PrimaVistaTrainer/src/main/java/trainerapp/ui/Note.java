@@ -2,33 +2,17 @@ package trainerapp.ui;
 
 public class Note {
 
-    private int length; // 1/nth note
     private Note next;
-    private Note previous;
-    private int midiValue;
+    private final int midiValue;
 
     // coordinates on canvas
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
-    private boolean isFlat = false;
-    private boolean isSharp = false;
-    private boolean isBarline = false;
-
-    private final String noteQuarterUp = "\uE1D5";
-    private final String noteQuarterDown = "\uE1D6";
-    private final String leger = "\uE022";
-    private final String barLine = "\uE030";
-
-    public Note(int midiValue, int length, int x, int y) {
+    public Note(int midiValue, int x, int y) {
         this.midiValue = midiValue;
-        this.length = length;
         this.x = x;
         this.y = y;
-    }
-
-    public Note(Note previous) {
-        this.previous = previous;
     }
 
     public int getX() {
@@ -51,27 +35,17 @@ public class Note {
         return next != null;
     }
 
-    public void setSharp(boolean sharp) {
-        isSharp = sharp;
-    }
-
-    public void setFlat(boolean flat) {
-        isFlat = flat;
-    }
-
-    public void setBarline() {
-        isBarline = true;
-    }
-
-    public void setPrevious(Note previous) {
-        this.previous = previous;
-    }
-
     public int getVal() {
         return midiValue;
     }
 
     public String toString() {
-        return noteQuarterUp;
+        if (midiValue > 70) {
+            String noteQuarterDown = "\uE1D6";
+            return noteQuarterDown;
+        } else {
+            String noteQuarterUp = "\uE1D5";
+            return noteQuarterUp;
+        }
     }
 }

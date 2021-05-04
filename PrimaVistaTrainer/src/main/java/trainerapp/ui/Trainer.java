@@ -50,6 +50,8 @@ public class Trainer {
     }
 
     public Scene startTraining() {
+        scrollPane.setHvalue(0);
+
         trainerSession.setScore(score);
 
         graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -160,5 +162,9 @@ public class Trainer {
         Text text = new Text(s);
         text.setFont(edwin);
         return text;
+    }
+
+    public Score getScore() {
+        return score;
     }
 }

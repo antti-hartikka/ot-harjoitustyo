@@ -9,7 +9,7 @@ import trainerapp.domain.Session;
 
 public class Statistics {
 
-    private DataService dataService;
+    private final DataService dataService;
 
     public Statistics(DataService dataService) {
         this.dataService = dataService;
