@@ -13,7 +13,7 @@ Tietokoneen näppäimistölläkin voi soittaa. Nuoteille on asetettu loogiset n�
 
 ---
 
-[Vaativuusmäärittely](/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](/dokumentaatio/vaatimusmaarittely.md)
 
 [Tuntikirjanpito](/dokumentaatio/tuntikirjanpito.md)
 
