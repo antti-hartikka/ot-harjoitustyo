@@ -3,12 +3,15 @@ package trainerapp.dao;
 import java.util.ArrayList;
 import java.sql.*;
 
+/**
+ * Data Access Object for storing and accessing user related data using SQLite database.
+ */
 public class DBUserDao implements UserDao {
 
     Connection db;
 
     /**
-     * Data Access Object for storing and accessing user related data using SQLite database.
+     *
      * @param url Url to database where this class will be connected
      */
     public DBUserDao(String url) {
@@ -54,8 +57,7 @@ public class DBUserDao implements UserDao {
                 users.add(r.getString("username"));
             }
 
-        } catch (SQLException e) {
-            System.out.println("Something went wrong at DBUserDao.getAllUsers(): " + e.toString());
+        } catch (SQLException ignored) {
         }
         return users;
     }

@@ -33,8 +33,8 @@ SessionDao sekä UserDao. Tiedot tallennetaan SQLite-tietokantatiedostoon, jossa
 ## Kaavioita
 
 ### Luokkakaavio
-![](/dokumentaatio/arkkitehtuuri.png)
+![](/dokumentaatio/kuvat/arkkitehtuuri.png)
 
 ### Sekvenssikaavio, kun käyttäjä lopettaa harjoitustapahtuman ennen nuottien loppumista
-![](/dokumentaatio/abort_training.png)
+![](/dokumentaatio/kuvat/abort_training.png)
 

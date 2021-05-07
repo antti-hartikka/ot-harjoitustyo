@@ -5,12 +5,15 @@ import trainerapp.domain.Session;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Data Access Object for storing and accessing session related data using SQLite database.
+ */
 public class DBSessionDao implements SessionDao {
 
     Connection db;
 
     /**
-     * Data Access Object for storing and accessing session related data using SQLite database.
+     *
      * @param url Url to database where this class will be connected
      */
     public DBSessionDao(String url) {

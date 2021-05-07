@@ -3,8 +3,9 @@ package trainerapp.ui;
 import javafx.scene.canvas.GraphicsContext;
 import trainerapp.domain.Score;
 
-import java.util.Arrays;
-
+/**
+ * This class draws all the notes in the training event
+ */
 public class ScoreDrawer {
 
     private Score score;
@@ -16,6 +17,12 @@ public class ScoreDrawer {
     private final int noteStart = 200;
     private final int initX;
 
+    /**
+     * Costructor for ScoreDrawer
+     * @param graphicsContext GraphicsGontext from canvas
+     * @param x x coordinate of starting point
+     * @param y y coordinate of starting point
+     */
     public ScoreDrawer(GraphicsContext graphicsContext, int x, int y) {
         this.graphicsContext = graphicsContext;
         this.x = x;
@@ -27,6 +34,9 @@ public class ScoreDrawer {
         this.score = score;
     }
 
+    /**
+     * This method draws everything on canvas
+     */
     public void draw() {
         int[] notes = score.getNotes();
         first = new Note(notes[0], noteStart, getY(notes[0]));
@@ -63,7 +73,7 @@ public class ScoreDrawer {
     }
 
     private void drawLeger(Note note) {
-        int val = note.getVal();
+        int val = note.getMidiValue();
         String leger = "\uE022";
         if (val == 40 || val == 60 || val == 81) {
             graphicsContext.fillText(leger, note.getX(), note.getY());

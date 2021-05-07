@@ -12,4 +12,5 @@
 | 26. huhtikuuta 2021  | 8 | Statistiikkan esityksen toteutus, midi-puoli ja scrollaus kunnossa. |
 | 3. toukokuuta 2021 | 6 | Eri sävellajien toteutus |
 | 4. toukokuuta 2021 | 6 | Testauksen, javadocin, ja dokumentaation laatimista.|
-| yhteensä | 63 |
+| 7. toukokuuta 2021 | 4 | viimeiset viilaukset |
+| yhteensä | 67 |

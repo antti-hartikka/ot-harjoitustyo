@@ -3,6 +3,9 @@ package trainerapp.domain;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+/**
+ * This class is used to manage training session data. Takes input values and stores session when ended.
+ */
 public class TrainerSession {
 
     private int[] playedNotes;
@@ -13,7 +16,7 @@ public class TrainerSession {
     private boolean isEnded = false;
 
     /**
-     * This class is used to manage training session data. Takes input values and stores session when ended.
+     *
      * @param user Username of current user
      * @param dataService Data service object for data storing
      */

@@ -37,4 +37,11 @@ public class ScoreTest {
         int noteCount = s.getNotes().length;
         assertEquals(64, noteCount);
     }
+
+    @Test
+    public void methodSetScaleSetsScaleCorrectly() {
+        Score s = new Score();
+        s.setScale(4, "major");
+        assertArrayEquals(new int[]{4, 6, 8, 9, 11, 1, 3}, s.getScale());
+    }
 }

@@ -1,5 +1,8 @@
 package trainerapp.ui;
 
+/**
+ * Note represents node in linked list that consists on notes
+ */
 public class Note {
 
     private Note next;
@@ -9,6 +12,12 @@ public class Note {
     private final int x;
     private final int y;
 
+    /**
+     * Costructor
+     * @param midiValue midi value of the note
+     * @param x horisontal position in canvas
+     * @param y vertical position in canvas
+     */
     public Note(int midiValue, int x, int y) {
         this.midiValue = midiValue;
         this.x = x;
@@ -35,10 +44,14 @@ public class Note {
         return next != null;
     }
 
-    public int getVal() {
+    public int getMidiValue() {
         return midiValue;
     }
 
+    /**
+     *
+     * @return returns quarter note glyph
+     */
     public String toString() {
         if (midiValue > 70) {
             String noteQuarterDown = "\uE1D6";

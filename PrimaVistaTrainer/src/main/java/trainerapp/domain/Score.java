@@ -3,6 +3,9 @@ package trainerapp.domain;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * This class is used for score related methods, such as generating new score.
+ */
 public class Score {
 
     private int noteBoundLow = 38;
@@ -12,7 +15,7 @@ public class Score {
     private int[] degrees;
 
     /**
-     * This class is used for score related methods, such as generating new score.
+     *
      * Constructor sets scale to C major.
      */
     public Score() {

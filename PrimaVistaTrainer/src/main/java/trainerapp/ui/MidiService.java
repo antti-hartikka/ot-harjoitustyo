@@ -6,16 +6,22 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Transmitter;
 import java.util.List;
 
+/**
+ * This class provides possibility to open and close midi inputs
+ */
 public class MidiService {
 
     private MidiDevice device;
 
+    /**
+     *
+     * @param trainer Trainer class for midi inputs to send notes
+     */
     public void openMidiDevice(Trainer trainer) {
         MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
-        for (int i = 0; i < infos.length; i++) {
+        for (MidiDevice.Info info : infos) {
             try {
-                device = MidiSystem.getMidiDevice(infos[i]);
-                System.out.println(infos[i]);
+                device = MidiSystem.getMidiDevice(info);
 
                 List<Transmitter> transmitters = device.getTransmitters();
 
@@ -36,6 +42,9 @@ public class MidiService {
 
     }
 
+    /**
+     * closes all midi inputs
+     */
     public void closeMidiDevice() {
         device.close();
     }

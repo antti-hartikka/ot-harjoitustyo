@@ -13,9 +13,11 @@ import javafx.scene.text.Font;
 import trainerapp.dao.DBSessionDao;
 import trainerapp.dao.DBUserDao;
 import trainerapp.domain.*;
-
 import java.util.Arrays;
 
+/**
+ * Main application
+ */
 public class UserInterface extends Application {
 
     private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
@@ -36,14 +38,12 @@ public class UserInterface extends Application {
 
         userSelection.getChildren().add(text("Select user from the list or create new user"));
 
-
         HBox listBox = new HBox();
         userSelection.getChildren().add(listBox);
 
         listBox.setSpacing(5);
         ChoiceBox<String> selectUserList = new ChoiceBox<>();
         selectUserList.getItems().addAll(dataService.getAllUsers());
-        selectUserList.setValue("select user");
         listBox.getChildren().add(selectUserList);
 
         Button selectUserButton = button("select");
@@ -104,9 +104,6 @@ public class UserInterface extends Application {
         });
 
 
-
-
-
         //   -----  settings menu --------
 
         VBox settingsMenu = new VBox();
@@ -159,7 +156,7 @@ public class UserInterface extends Application {
         // -------  event handlers  ----
 
         selectUserButton.setOnAction(actionEvent -> {
-            if (selectUserList.getValue().length() > 2) {
+            if (selectUserList.getValue() != null) {
                 user = selectUserList.getValue();
                 session = new TrainerSession(user, dataService);
                 trainer.setTrainerSession(session);
@@ -176,7 +173,7 @@ public class UserInterface extends Application {
                 trainer.setTrainerSession(session);
                 borderPane.setCenter(mainMenu);
             } else {
-                selectUserErrorMessage.setText("username already taken or too long (20 characters)");
+                selectUserErrorMessage.setText("username already taken or incorrect (3-20 characters a-z, 0-9)");
             }
         });
 
@@ -220,11 +217,14 @@ public class UserInterface extends Application {
                 trainer.setNoteCount(Integer.parseInt(input));
                 noteCountErrorMessage.setText(null);
             } else {
-                noteCountErrorMessage.setText("nope");
+                noteCountErrorMessage.setText("incorrect value");
             }
         });
 
         setScaleButton.setOnMouseClicked(event -> {
+            if (root.getValue() == null || accidental.getValue() == null || mode.getValue() == null) {
+                return;
+            }
             int rootNote = getRootNote(root.getValue());
             if (accidental.getValue().equals("sharp")) {
                 rootNote = (rootNote + 1) % 12;

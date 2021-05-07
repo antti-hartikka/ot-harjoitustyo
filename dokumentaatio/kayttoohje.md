@@ -2,6 +2,10 @@
 
 Prima vista trainer on tarkoitettu harjoitusohjelmaksi heille, jotka osaavat lukea musiikkinuotteja ja haluavat harjoittaa lukutaitoaan soittamalla nuoteista.
 
+## Asennus
+
+Lataa uusin release githubista ja toimi releasen ohjeiden mukaisesti
+
 ## Käyttäjän valinta
 
 Mikäli olet käyttänyt ohjelmaa aikaisemmin, löydät käyttäjänimesi alasvetolaatikosta. Mikäli olet uusi käyttäjä, kirjoita nimesi sille varattuun

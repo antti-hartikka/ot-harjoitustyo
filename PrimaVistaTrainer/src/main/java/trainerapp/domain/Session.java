@@ -2,13 +2,16 @@ package trainerapp.domain;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class is used to model single session and its data.
+ */
 public class Session {
     private final LocalDateTime date;
     private final double averageMiss;
     private final String user;
 
     /**
-     * This class is used to model single session and its data.
+     *
      * @param user Username as a String
      * @param date Date and time of the session
      * @param averageMiss Average miss of training session, units are semitones.

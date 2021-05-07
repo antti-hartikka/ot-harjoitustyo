@@ -14,24 +14,29 @@ import javafx.scene.text.Text;
 import trainerapp.domain.Score;
 import trainerapp.domain.TrainerSession;
 
+/**
+ * This class handles training event; scene, content, etc.
+ */
 public class Trainer {
 
     private final Font edwin = Font.loadFont("file:resources/fonts/Edwin-Roman.otf", 20);
     private final Font bravura = Font.loadFont("file:resources/fonts/BravuraText.otf", 100);
-    GraphicsContext graphicsContext;
-    Canvas canvas;
-    Pane pane = new Pane();
-    ScrollPane scrollPane = new ScrollPane();
-    Score score = new Score();
-    ScoreDrawer scoreDrawer;
-    Rectangle highlight = new Rectangle(100, 150, 90, 350);
-    TrainerSession trainerSession;
-    Scene scene = new Scene(scrollPane);
+    private final GraphicsContext graphicsContext;
+    private final Canvas canvas;
+    private final Pane pane = new Pane();
+    private final ScrollPane scrollPane = new ScrollPane();
+    private final Score score = new Score();
+    private final ScoreDrawer scoreDrawer;
+    private final Rectangle highlight = new Rectangle(100, 150, 90, 350);
+    private TrainerSession trainerSession;
+    private final Scene scene = new Scene(scrollPane);
     private final MidiService midiService = new MidiService();
     private int noteCount = 32;
 
+    /**
+     * Constructor, no parameters needed
+     */
     public Trainer() {
-
         canvas = new Canvas(5000, 700);
         graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.BLACK);
@@ -49,6 +54,10 @@ public class Trainer {
         return scene;
     }
 
+    /**
+     * This needs to be called when starting training event
+     * @return scene for stage
+     */
     public Scene startTraining() {
         scrollPane.setHvalue(0);
 
@@ -73,6 +82,10 @@ public class Trainer {
         return scene;
     }
 
+    /**
+     * Handles keyevents from training scene
+     * @param keyEvent Keyevent from scene
+     */
     public void handleKeyEvent(KeyEvent keyEvent) {
         int v = -1;
         switch (keyEvent.getCode()) {
@@ -118,7 +131,7 @@ public class Trainer {
         handleNote(v);
     }
 
-    public void moveHighlight() {
+    private void moveHighlight() {
         highlight.setTranslateX(highlight.getTranslateX() + 75);
     }
 
@@ -126,11 +139,18 @@ public class Trainer {
         this.noteCount = noteCount;
     }
 
+    /**
+     * Closes midi device and calls ending procedures
+     */
     public void endTraining() {
         midiService.closeMidiDevice();
         trainerSession.endSession();
     }
 
+    /**
+     * handles incoming midi note
+     * @param midiValue note value
+     */
     public void handleMidiNote(byte midiValue) {
         handleNote(midiValue);
     }

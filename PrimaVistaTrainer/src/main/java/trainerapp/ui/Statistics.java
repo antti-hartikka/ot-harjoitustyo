@@ -7,14 +7,26 @@ import javafx.scene.chart.XYChart;
 import trainerapp.domain.DataService;
 import trainerapp.domain.Session;
 
+/**
+ * This class is used to render statistics to user
+ */
 public class Statistics {
 
     private final DataService dataService;
 
+    /**
+     * Constructor
+     * @param dataService dataservice to access data
+     */
     public Statistics(DataService dataService) {
         this.dataService = dataService;
     }
 
+    /**
+     * LineChart for statistics
+     * @param username Username to get correct data
+     * @return Returns LineChart object that represents users training history
+     */
     public LineChart<String, Number> getChart(String username) {
         CategoryAxis x = new CategoryAxis();
         NumberAxis y = new NumberAxis();
