@@ -58,9 +58,7 @@ public class DBSessionDao implements SessionDao {
                 );
                 list.add(session);
             }
-        } catch (SQLException e) {
-            System.out.println("Something went wrong at DBSessionDao.getSessions: " + e.toString());
-            e.printStackTrace();
+        } catch (SQLException ignored) {
         }
         return list;
     }
@@ -79,8 +77,7 @@ public class DBSessionDao implements SessionDao {
             s.setDouble(2, session.getAverageMiss());
             s.setDate(3, new Date(System.currentTimeMillis()));
             s.execute();
-        } catch (SQLException e) {
-            System.out.println("Something went wrong at DBSessionDao.addSession: " + e.toString());
+        } catch (SQLException ignored) {
         }
     }
 }
